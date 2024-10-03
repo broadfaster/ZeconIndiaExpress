@@ -4,21 +4,21 @@
   align-items: center
   height: 48px
   padding: 0 24px
-  background: $blue
+  background: $green
   border-radius: 24px
   +button-1
   text-align: center
   color: $neutrals8
   transition: all .2s
   &:hover
-    background: darken($blue, 10)
+    background: darken($green, 10)
   &.disabled
     opacity: .5
     pointer-events: none
   &.done
     background: $neutrals5
   &.loading
-    background: darken($blue, 15)
+    background: darken($green, 15)
     font-size: 0
   &.error
     box-shadow: 0 0 0 2px $neutrals6 inset
@@ -43,8 +43,8 @@
     fill: $neutrals2
     transition: fill .2s
   &:hover
-    background: $blue
-    box-shadow: 0 0 0 2px $blue inset
+    background: $green
+    box-shadow: 0 0 0 2px $green inset
     color: $neutrals8
     svg
       fill: $neutrals8
@@ -54,7 +54,7 @@
     svg
       fill: $neutrals8
     &:hover
-      box-shadow: 0 0 0 2px $blue inset
+      box-shadow: 0 0 0 2px $green inset
   
 .button-pink
   background: $pink
@@ -80,8 +80,8 @@
       fill: $neutrals4
       transition: fill .2s
   &:hover
-      background: $blue
-      box-shadow: 0 0 0 2px $blue inset
+      background: $green
+      box-shadow: 0 0 0 2px $green inset
       svg
           fill: $neutrals8
   +dark-common

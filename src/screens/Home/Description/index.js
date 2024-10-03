@@ -32,14 +32,14 @@ const Description = ({ info }) => {
               onClick={() => handleClick('/upload-details')}
               className={cn('button', styles.button)}
             >
-              Create item
+              Contact Us
             </button>
           </div>
         </div>
         <div className={styles.gallery}>
           <div className={styles.heroWrapper}>
             <Image
-              quality={60}
+              quality={80}
               className={styles.preview}
               layout="fill"
               src={info?.metadata?.image?.imgix_url}

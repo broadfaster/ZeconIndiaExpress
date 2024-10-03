@@ -49,7 +49,7 @@ const Categories = ({ info, type }) => {
       <div className={styles.section}>
         <div className={cn('container', styles.container)}>
           <div className={styles.wrapper}>
-            <h3 className={cn('h3', styles.title)}>Hot collections</h3>
+            <h3 className={cn('h3', styles.title)}>Our Collections</h3>
             <div className={styles.inner}>
               <Slider className="collection-slider" {...settings}>
                 {info?.length &&

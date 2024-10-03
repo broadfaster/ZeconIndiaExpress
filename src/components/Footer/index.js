@@ -5,8 +5,11 @@ import Group from './Group'
 import Theme from '../Theme'
 import Image from '../Image'
 import SocialMedia from '../SocialMedia'
+import { FiPhoneCall } from 'react-icons/fi'
+import { IoLocationOutline } from 'react-icons/io5'
 
 import styles from './Footer.module.sass'
+import Icon from '../Icon'
 
 const Footers = ({ navigation }) => {
   return (
@@ -24,9 +27,20 @@ const Footers = ({ navigation }) => {
                 objectFit="cntain"
               />
             </AppLink>
-            <div className={styles.info}>The New Creative Economy.</div>
+            <div className={styles.address}>
+              <FiPhoneCall className={styles.icon}/>
+              <div className={styles.info}>+91 9792199994</div>
+            </div>
+            <div className={styles.address}>
+              <IoLocationOutline className={styles.icon}/>
+              <div className={styles.info}>
+                Shop No-632, 167, Ayodhya Road, near New High Court, Shankar
+                Puri, Kamta, Lucknow, Uttar Pradesh 226028
+              </div>
+            </div>
+
             <div className={styles.version}>
-              <div className={styles.details}>Dark theme</div>
+              <div className={styles.details}>Night Mode</div>
               <Theme className="theme-big" />
             </div>
           </div>
@@ -34,14 +48,14 @@ const Footers = ({ navigation }) => {
             <Group className={styles.group} item={navigation?.['menu']} />
           </div>
           <div className={styles.col}>
-            <AppLink href={`https://www.cosmicjs.com/features`}>
-              <p className={styles.category}>About Cosmic</p>
+            <AppLink href={`#`}>
+              <p className={styles.category}>Know More</p>
             </AppLink>
             <AppLink href={`https://docs.cosmicjs.com/`}>
-              <p className={styles.text}>Documentation</p>
+              <p className={styles.text}>Google Map Address</p>
             </AppLink>
             <AppLink href={`https://www.cosmicjs.com/contact`}>
-              <p className={styles.text}>Contact Us</p>
+              <p className={styles.text}>Schedule a Meeting</p>
             </AppLink>
             <SocialMedia className={styles.form} />
             <AppLink
@@ -49,7 +63,7 @@ const Footers = ({ navigation }) => {
             >
               <button
                 aria-hidden="true"
-                className={cn('button', styles.button)}
+                className={cn('button', styles.button, styles.newsletterbtn)}
               >
                 Subscribe Newsletter
               </button>
@@ -60,13 +74,13 @@ const Footers = ({ navigation }) => {
       <div>
         <div className={styles.copyright} aria-hidden="true">
           <span className={styles.cosmicGroup}>
-            <p className={styles.powered}>Powered by </p>
-            <a href="https://www.cosmicjs.com">
+            <p className={styles.powered}>Made with ❤️ by</p>
+            <a href="https://www.broadfaster.com">
               <Image
                 className={styles.cosmic}
                 size={{ width: '110px', height: '90px' }}
                 src="/cosmic.svg"
-                alt="Cosmic Logo"
+                alt="Broadfaster Logo"
                 objectFit="contain"
               />
             </a>

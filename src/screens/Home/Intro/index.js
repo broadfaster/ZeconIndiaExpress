@@ -33,7 +33,7 @@ const Intro = ({ info }) => {
             <div className={styles.slide}>
               <div className={styles.row}>
                 <Image
-                  size={{ width: '100%', height: '80vh' }}
+                  size={{ width: '70%', height: '80vh' }}
                   className={styles.player}
                   srcSet={info?.metadata?.image?.imgix_url}
                   srcSetDark={info?.metadata?.image?.imgix_url}
@@ -47,7 +47,7 @@ const Intro = ({ info }) => {
                     {info?.metadata?.title}
                   </h3>
                   <div className={styles.wrap}>
-                    <div className={styles.info}>Current Bid</div>
+                    <div className={styles.info}>Featured</div>
                     <div className={styles.price}>
                       {info?.metadata?.description}
                     </div>

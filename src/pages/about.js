@@ -22,9 +22,9 @@ const AboutUs = ({ navigationItems, landing }) => {
   return (
     <Layout navigationPaths={navigationItems[0]?.metadata}>
       <PageMeta
-        title={'About | uNFT Marketplace'}
+        title={'About | Zecon India Express'}
         description={
-          'uNFT Marketplace built with Cosmic CMS, Next.js, and the Stripe API'
+          'Explore electric scooters and e-bikes in India. Choose Zecon that connects the nation from Kashmir to Kerala, a clean mobility solution.'
         }
       />
       <div className={cn('section', styles.section)}>
@@ -32,7 +32,7 @@ const AboutUs = ({ navigationItems, landing }) => {
           <div className={styles.wrap}>
             <div className={styles.heroWrapper}>
               <Image
-                quality={60}
+                quality={80}
                 layout="fill"
                 src={infoAbout?.metadata?.image?.imgix_url}
                 placeholder="blur"

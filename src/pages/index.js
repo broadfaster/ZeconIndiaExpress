@@ -60,8 +60,8 @@ const Home = ({
         info={categoriesGroup['groups']}
         type={categoriesGroup['type']}
       />
-      <Selection info={categoriesGroup['groups']} type={categoryTypes} />
       <Intro info={chooseBySlug(landing, 'introduction')} />
+      <Selection info={categoriesGroup['groups']} type={categoryTypes} />
       <Partners info={reviews} />
       <Discover
         info={categoriesGroup['groups']}

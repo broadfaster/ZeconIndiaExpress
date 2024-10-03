@@ -31,12 +31,13 @@ const Layout = ({ children, title, navigationPaths }) => {
     <>
       <Meta />
       <PageMeta
-        title={'uNFT Marketplace'}
+        title={'Zecon India Express'}
         description={
-          'uNFT Marketplace built with Cosmic CMS, Next.js, and the Stripe API'
+          'Explore electric scooters and e-bikes in India. Choose Zecon that connects the nation from Kashmir to Kerala, a clean mobility solution.'
         }
       />
-      <div className={styles.github}>
+      {/* TODO: Top Bar For Message Display : Change the Top Margin to display */}
+      {/* <div className={styles.github}>
         <p className={styles.source}>
           The source code for this marketplace app is{' '}
           <span className={styles.github}>
@@ -50,7 +51,7 @@ const Layout = ({ children, title, navigationPaths }) => {
           </span>
           .
         </p>
-      </div>
+      </div> */}
       <div className={styles.page}>
         <Header navigation={navigationPaths || navigation} />
         <main className={styles.inner}>{children}</main>

@@ -2,7 +2,7 @@
 
 .header
     position: fixed
-    top: 35px
+    top: 0px
     left: 0
     width: 100%
     z-index: 20
@@ -13,7 +13,7 @@
     +m
         padding: 10px 0
         border: none
-        top: 50px
+        top: 0px
     +dark
         background: $neutrals1
         border-color: $neutrals3
@@ -36,15 +36,15 @@
                 fill: $neutrals4
         &:hover
             background: transparent
-            color: $blue
+            color: $green
             svg
-                fill: $blue
+                fill: $green
     .login
-        border: 1px solid $blue
-        color: $blue
+        border: 1px solid $green
+        color: $green
         transparent: all 0.5s ease-out
         &:hover
-            background: $blue
+            background: $green
             color: $white
 
 .logo
@@ -118,7 +118,7 @@
         line-height: 64px
     &:hover,
     &.active
-        color: $blue
+        color: $green
     &:nth-child(n+6)
         display: none
         +m
@@ -165,7 +165,7 @@
         transition: fill .2s
     &:hover
         svg
-            fill: $blue
+            fill: $green
 
 .notification
     margin-right: 24px

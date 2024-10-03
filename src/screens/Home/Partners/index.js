@@ -58,7 +58,7 @@ const Partners = ({ info }) => {
         <div className={cn('container', styles.container)}>
           <div className={styles.top}>
             <div className={styles.box}>
-              <div className={styles.stage}>Join Us!</div>
+              <div className={styles.stage}>Our Showroom</div>
               <h2 className={cn('h3', styles.title)}>Reviews</h2>
             </div>
           </div>
