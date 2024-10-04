@@ -44,26 +44,34 @@ const Selection = ({ info, type }) => {
                         />
                         <div className={styles.head}>
                           <div className={styles.line}>
-                            <Image
+                            {/* <Image
                               className={styles.avatar}
                               size={{ width: '48px', height: '48px' }}
                               src={x.metadata?.image?.imgix_url}
                               alt="Avatar"
                               objectFit="cover"
-                            />
+                            /> */}
                             <div className={styles.description}>
                               <div className={styles.title}>{x?.title}</div>
-                              <div
+                              {/* <div
                                 className={styles.counter}
-                              >{`${x?.metadata?.count} item`}</div>
+                              >{`${x?.metadata?.count} item`}</div> */}
                             </div>
                           </div>
-                          <div className={styles.box}>
+                          {/* <div className={styles.box}>
                             <div className={styles.content}>Best!</div>
                             <div
                               className={styles.price}
                             >{`${x?.metadata?.price} $`}</div>
-                          </div>
+                          </div> */}
+                          <button
+                            className={cn(
+                              'button-stroke button-small',
+                              styles.button
+                            )}
+                          >
+                            Show more
+                          </button>
                         </div>
                       </AppLink>
                     )
@@ -92,19 +100,19 @@ const Selection = ({ info, type }) => {
                         <div className={styles.description}>
                           <div className={styles.title}>{x.title}</div>
                           <div className={styles.line}>
-                            <Image
+                            {/* <Image
                               className={styles.avatar}
                               size={{ width: '48px', height: '48px' }}
                               src={x.metadata?.image?.imgix_url}
                               alt="Avatar"
                               objectFit="cover"
-                            />
-                            <div
+                            /> */}
+                            {/* <div
                               className={styles.price}
-                            >{`$${x?.metadata?.price}`}</div>
-                            <div
+                            >{`$${x?.metadata?.price}`}</div> */}
+                            {/* <div
                               className={styles.content}
-                            >{`${x?.metadata?.count} item`}</div>
+                            >{`${x?.metadata?.count} item`}</div> */}
                           </div>
                           <button
                             className={cn(
@@ -122,7 +130,7 @@ const Selection = ({ info, type }) => {
           </div>
           <div className={styles.sidebar}>
             <div className={styles.info}>
-              Latest upload{' '}
+              Latest Collection{' '}
               <span className={styles.smile} role="img" aria-label="fire">
                 🔥
               </span>

@@ -72,7 +72,9 @@
     img
         width: 100%
         height: 100%
-        object-fit: cover
+        object-fit: container
+        margin: auto
+        object-position: 50% 100% 
     &:before
         content: ""
         position: absolute
@@ -116,6 +118,7 @@
 .line,
 .head
     display: flex
+    justify-content: space-between
 
 .line
     align-items: center

@@ -15,7 +15,7 @@ const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
 const settings = {
   infinite: true,
   speed: 700,
-  slidesToShow: 4,
+  slidesToShow: 3,
   slidesToScroll: 1,
   nextArrow: (
     <SlickArrow>
@@ -43,7 +43,7 @@ const settings = {
     {
       breakpoint: 767,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
         infinite: true,
       },
     },
