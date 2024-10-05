@@ -157,10 +157,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
               </div> */}
               <AppLink className={styles.link} href={'/contact'}>
                 <div className={styles.btns}>
-                  <button
-                    className={cn('button', styles.button)}
-                    onClick={handleAddToCart}
-                  >
+                  <button className={cn('button', styles.button)}>
                     Booking Request
                   </button>
                 </div>

@@ -195,34 +195,45 @@
         +m
             right: calc(50% - 44px)
 
-// bid slider
 .bid-slider
-    position: static
-    .slick-list
-        overflow: visible
-        +s
-            margin: 0 -215px 0 0
-    .slick-track
-        display: flex
+  position: static
+  .slick-list
+    overflow: visible
+    margin: 0 -215px 0 0
+    // Use media queries for mobile devices
+    @media (max-width: 768px)
+      margin: 0 // Remove or reduce the negative margin on mobile
+      overflow-x: hidden // Prevent horizontal overflow on mobile
+  .slick-track
+    display: flex
+  .slick-slide
+    height: auto
+    margin: 0 16px
+    opacity: 0
+    transition: opacity .4s
+    +m
+      margin: 0 8px
+    &.slick-active
+      opacity: 1
+    & > div
+      display: flex
+      height: 100%
+      flex-grow: 1
+  .slick-arrow
+    top: 4px
+  .slick-prev
+    right: 48px
+  .slick-next
+    right: 0
+
+  // Media queries for mobile devices
+  @media (max-width: 768px)
     .slick-slide
-        height: auto
-        margin: 0 16px
-        opacity: 0
-        transition: opacity .4s
-        +m
-            margin: 0 8px
-        &.slick-active
-            opacity: 1
-        & > div
-            display: flex
-            height: 100%
-            flex-grow: 1
-    .slick-arrow
-        top: 4px
+      margin: 0 4px // Reduce margin between slides on mobile
     .slick-prev
-        right: 48px
+      right: 32px // Adjust arrow positions on mobile
     .slick-next
-        right: 0
+      right: 8px
 
 // collection slider
 .collection-slider
