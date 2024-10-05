@@ -1,5 +1,6 @@
 const createFormFields = {
   name: '',
+  phone: '',
   email: '',
   message: '',
 }

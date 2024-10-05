@@ -18,7 +18,13 @@ const Intro = ({ info }) => {
   const { push } = useRouter()
 
   const handleClick = href => {
-    push(href)
+    const queryParams = {
+      category: '66fec72d68de981763c22745',
+    }
+    push({
+      pathname: href, // The page you want to navigate to
+      query: queryParams, // The query parameters
+    })
   }
 
   return (

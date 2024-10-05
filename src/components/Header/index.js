@@ -79,13 +79,13 @@ const Headers = ({ navigation }) => {
           <AppLink
             aria-label="search"
             aria-hidden="true"
-            className={cn('button-small', styles.button)}
+            className={cn('button-large', styles.button)}
             href={`/search`}
           >
             <Icon name="search" size="20" />
             Search
           </AppLink>
-          {cosmicUser?.['id'] ? (
+          {/* {cosmicUser?.['id'] ? (
             <User className={styles.user} user={cosmicUser} />
           ) : (
             <button
@@ -96,7 +96,7 @@ const Headers = ({ navigation }) => {
             >
               Login
             </button>
-          )}
+          )} */}
           <button
             aria-label="user-information"
             aria-hidden="true"
@@ -105,7 +105,7 @@ const Headers = ({ navigation }) => {
           />
         </div>
       </header>
-      <Modal
+      {/* <Modal
         visible={visibleAuthModal}
         onClose={() => setVisibleAuthModal(false)}
       >
@@ -114,7 +114,7 @@ const Headers = ({ navigation }) => {
           handleOAuth={handleOAuth}
           handleClose={() => setVisibleAuthModal(false)}
         />
-      </Modal>
+      </Modal> */}
     </>
   )
 }

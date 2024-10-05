@@ -47,12 +47,20 @@ const AboutUs = ({ navigationItems, landing }) => {
             </h2>
             <h3 className={styles.info}>{infoAbout?.metadata?.subtitle}</h3>
             <p className={styles.info}>{infoAbout?.metadata?.description}</p>
-            <button
-              onClick={() => handleClick(`/search`)}
-              className={cn('button-stroke', styles.form)}
-            >
-              Start your search
-            </button>
+            <div className={styles.foot}>
+              <button
+                onClick={() => handleClick(`/search`)}
+                className={cn('button-stroke', styles.button)}
+              >
+                Start your search
+              </button>
+              <button
+                onClick={() => handleClick(`/contact`)}
+                className={cn('button-stroke', styles.button, styles.greenbtn)}
+              >
+                Contact Us
+              </button>
+            </div>
           </div>
         </div>
       </div>

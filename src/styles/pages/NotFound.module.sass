@@ -111,3 +111,27 @@
 .text
     +caption-2
     color: $neutrals4
+
+
+.foot
+    display: flex
+    align-items: center
+    justify-content: center
+    +m
+        display: block
+        text-align: center
+    .button
+        +m
+            width: 100%
+        &:not(:last-child)
+            margin-right: 24px
+            +m
+                margin: 0 0 12px
+
+
+.greenbtn 
+    background-color: $green
+    color: $white
+    &:hover
+        color: $black
+        transition-delay:0.1s

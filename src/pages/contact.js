@@ -15,6 +15,7 @@ import { getAllDataByType } from '../lib/cosmic'
 import { OPTIONS } from '../utils/constants/appConstants'
 import createFormFields from '../utils/constants/createFormFields'
 import { getToken } from '../utils/token'
+import gmap from '../../public/images/content/gmap.png'
 
 import styles from '../styles/pages/UploadDetails.module.sass'
 import { PageMeta } from '../components/Meta'
@@ -30,13 +31,14 @@ const Contact = ({ navigationItems, categoriesType }) => {
 
   const [fillFiledMessage, setFillFiledMessage] = useState(false)
 
-  const [{ name, email, message }, setFields] = useState(() => createFormFields)
+  const [{ name, phone, email, message }, setFields] = useState(
+    () => createFormFields
+  )
   const [visibleAuthModal, setVisibleAuthModal] = useState(false)
   const [visiblePreview, setVisiblePreview] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-
-  }, [])
+  useEffect(() => {}, [])
 
   const handleOAuth = useCallback(
     async user => {
@@ -48,28 +50,42 @@ const Contact = ({ navigationItems, categoriesType }) => {
     [cosmicUser, uploadFile]
   )
 
-  const handleChange = ({ target: { name, value } }) =>
-    setFields(prevFields => ({
-      ...prevFields,
-      [name]: value,
-    }))
+  const handleChange = ({ target: { name, value } }) => {
+    if (name === 'phone') {
+      // Remove any non-numeric characters
+      const phoneNumber = value.replace(/\D/g, '')
+
+      if (phoneNumber.length <= 10) {
+        setFields(prevFields => ({
+          ...prevFields,
+          [name]: phoneNumber,
+        }))
+      }
+    } else {
+      setFields(prevFields => ({
+        ...prevFields,
+        [name]: value,
+      }))
+    }
+  }
 
   const previewForm = useCallback(() => {
-    if (title && count && price && uploadMedia) {
+    if ((name, phone, email, message)) {
       fillFiledMessage && setFillFiledMessage(false)
+      setLoading(true)
       setVisiblePreview(true)
     } else {
       setFillFiledMessage(true)
     }
-  }, [name, email, message])
+  }, [name, phone, email, message])
 
   const submitForm = useCallback(
     async e => {
       e.preventDefault()
 
-      if (name && email && message) {
+      if (name && phone && email && message) {
         fillFiledMessage && setFillFiledMessage(false)
-
+        setLoading(true)
         const response = await fetch('/api/form', {
           method: 'POST',
           headers: {
@@ -78,6 +94,7 @@ const Contact = ({ navigationItems, categoriesType }) => {
           },
           body: JSON.stringify({
             name,
+            phone,
             email,
             message,
           }),
@@ -89,25 +106,27 @@ const Contact = ({ navigationItems, categoriesType }) => {
 
         if (createdContactDetail['object']) {
           toast.success(
-            `Successfully added ${createdContactDetail['object']['title']} item`,
+            `Thank You, We will reach you soon ${createdContactDetail['object']['title']} item`,
             {
               position: 'bottom-right',
             }
           )
+          setLoading(false)
+          setFields(createFormFields)
         }
       } else {
         setFillFiledMessage(true)
       }
     },
-    [fillFiledMessage, push, name, email, message]
+    [fillFiledMessage, push, name, phone, email, message]
   )
 
   return (
     <Layout navigationPaths={navigationItems[0]?.metadata || navigation}>
       <PageMeta
-        title={'Create Item | uNFT Marketplace'}
+        title={'Create Item | Zecon India Express'}
         description={
-          'uNFT Marketplace built with Cosmic CMS, Next.js, and the Stripe API'
+          'Explore electric scooters and e-bikes in India. Choose Zecon that connects the nation from Kashmir to Kerala, a clean mobility solution.'
         }
       />
       <div className={cn('section', styles.section)}>
@@ -135,13 +154,22 @@ const Contact = ({ navigationItems, categoriesType }) => {
                     />
                     <TextInput
                       className={styles.field}
+                      label="Your Phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="e. g. 98978378XX"
+                      onChange={handleChange}
+                      value={phone}
+                      required
+                    />
+                    <TextInput
+                      className={styles.field}
                       label="Your Email"
                       name="email"
                       type="email"
-                      placeholder="e. g. akshat20kumar@gmail.com"
+                      placeholder="e. g. kumar@gmail.com"
                       onChange={handleChange}
                       value={email}
-                      required
                     />
                     <TextInput
                       className={styles.field}
@@ -162,13 +190,13 @@ const Contact = ({ navigationItems, categoriesType }) => {
                   onClick={submitForm}
                   type="submit"
                 >
-                  <span>Submit</span>
-                  <Icon name="arrow-next" size="10" />
+                  {loading ? <Loader /> : 'Submit'}
                 </button>
                 {fillFiledMessage && (
                   <div className={styles.saving}>
-                    <span>Please fill all fields</span>
-                    <Loader className={styles.loader} />
+                    <span className={styles.fillmessage}>
+                      Please fill all fields
+                    </span>
                   </div>
                 )}
               </div>
@@ -176,7 +204,7 @@ const Contact = ({ navigationItems, categoriesType }) => {
           </div>
           <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
-            info={{ name, email, message }}
+            info={{ name, phone, email, message }}
             image={uploadMedia?.['imgix_url']}
             onClose={() => setVisiblePreview(false)}
           />

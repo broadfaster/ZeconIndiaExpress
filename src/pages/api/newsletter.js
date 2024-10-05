@@ -6,20 +6,14 @@ const cosmic = createBucketClient({
   writeKey: process.env.COSMIC_WRITE_KEY,
 })
 
-export default async function createHandler(
-  { body: { name, phone, email, message } },
-  res
-) {
+export default async function createHandler({ body: { email } }, res) {
   const metadata = {
-    name,
-    phone,
     email,
-    message,
   }
   try {
     const data = await cosmic.objects.insertOne({
       title: email,
-      type: 'contacts',
+      type: 'newsletters',
       metadata,
     })
     res.status(200).json(data)

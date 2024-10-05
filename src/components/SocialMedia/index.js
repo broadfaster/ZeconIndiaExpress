@@ -4,7 +4,7 @@ import {
   FiYoutube,
   FiLinkedin,
   FiSlack,
-  FiInstagram 
+  FiInstagram,
 } from 'react-icons/fi'
 import AppLink from '../AppLink'
 
@@ -13,24 +13,24 @@ import styles from './SocialMedia.module.sass'
 const socialMedia = [
   {
     Icon: FiFacebook,
-    url: 'https://www.facebook.com/cosmicjs',
+    url: 'https://www.facebook.com/people/Zecon-EV-Motors/61558117237470/',
   },
   {
     Icon: FiInstagram,
-    url: 'https://cosmcijs.slack.com',
+    url: 'https://www.instagram.com/zeconmotors/',
   },
   {
     Icon: FiTwitter,
-    url: 'https://twitter.com/cosmicjs',
+    url: '#',
   },
   {
     Icon: FiLinkedin,
-    url: 'https://www.linkedin.com/company/cosmicjs/',
+    url: '#',
   },
   {
     Icon: FiYoutube,
-    url: 'https://www.youtube.com/cosmicjs',
-  }
+    url: '#',
+  },
 ]
 
 const SocialMedia = () => {

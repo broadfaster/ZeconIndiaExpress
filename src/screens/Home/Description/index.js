@@ -29,7 +29,7 @@ const Description = ({ info }) => {
             </button>
             <button
               aria-hidden="true"
-              onClick={() => handleClick('/upload-details')}
+              onClick={() => handleClick('/contact')}
               className={cn('button', styles.button)}
             >
               Contact Us

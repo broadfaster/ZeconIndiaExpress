@@ -9,6 +9,7 @@ import Dropdown from '../../components/Dropdown'
 import Modal from '../../components/Modal'
 import OAuth from '../../components/OAuth'
 import Image from '../../components/Image'
+import AppLink from '../../components/AppLink'
 import {
   getDataBySlug,
   getAllDataByType,
@@ -94,14 +95,39 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
           <div className={styles.details}>
             <h1 className={cn('h3', styles.title)}>{itemInfo[0]?.title}</h1>
             <div className={styles.cost}>
+              {/* <div className={cn('status-stroke-green', styles.price)}>
+                {`₹ ${itemInfo[0]?.metadata?.price}`}
+              </div> */}
               <div className={cn('status-stroke-green', styles.price)}>
-                {`$${itemInfo[0]?.metadata?.price}`}
+                {itemInfo[0]?.metadata?.discountedPrice ? (
+                  // If there is a discounted price, show both prices
+                  <>
+                    {/* Original Price with strikethrough */}
+                    <span
+                      style={{
+                        textDecoration: 'line-through',
+                        color: 'red',
+                        marginRight: '10px',
+                      }}
+                    >
+                      ₹ {itemInfo[0]?.metadata?.price}
+                    </span>
+                    {/* Discounted Price */}
+                    <span style={{ color: 'green' }}>
+                      ₹ {itemInfo[0]?.metadata?.discountedPrice}
+                    </span>
+                  </>
+                ) : (
+                  // If no discounted price, show only the current price
+                  <span>₹ {itemInfo[0]?.metadata?.price}</span>
+                )}
               </div>
-              <div className={styles.counter}>
+
+              {/* <div className={styles.counter}>
                 {itemInfo[0]?.metadata?.count > 0
                   ? `${itemInfo[0]?.metadata?.count} in stock`
                   : 'Not Available'}
-              </div>
+              </div> */}
             </div>
             <div className={styles.info}>
               {itemInfo[0]?.metadata?.description}
@@ -121,22 +147,24 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
               ))}
             </div>
             <div className={styles.actions}>
-              <div className={styles.dropdown}>
+              {/* <div className={styles.dropdown}>
                 <Dropdown
                   className={styles.dropdown}
                   value={option}
                   setValue={setOption}
                   options={counts}
                 />
-              </div>
-              <div className={styles.btns}>
-                <button
-                  className={cn('button', styles.button)}
-                  onClick={handleAddToCart}
-                >
-                  Buy Now
-                </button>
-              </div>
+              </div> */}
+              <AppLink className={styles.link} href={'/contact'}>
+                <div className={styles.btns}>
+                  <button
+                    className={cn('button', styles.button)}
+                    onClick={handleAddToCart}
+                  >
+                    Booking Request
+                  </button>
+                </div>
+              </AppLink>
             </div>
           </div>
         </div>
