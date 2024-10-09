@@ -61,13 +61,13 @@ const Footers = ({ navigation }) => {
             <Group className={styles.group} item={navigation?.['menu']} />
           </div>
           <div className={styles.col}>
-            <AppLink href={`#`}>
+            <AppLink href="#">
               <p className={styles.category}>Know More</p>
             </AppLink>
-            <AppLink href={`https://docs.cosmicjs.com/`}>
-              <p className={styles.text}>Google Map Address</p>
+            <AppLink href="/policy">
+              <p className={styles.text}>Policy</p>
             </AppLink>
-            <AppLink href={`https://www.cosmicjs.com/contact`}>
+            <AppLink href="/">
               <p className={styles.text}>Schedule a Meeting</p>
             </AppLink>
             <SocialMedia className={styles.form} />
@@ -84,8 +84,8 @@ const Footers = ({ navigation }) => {
       <div>
         <div className={styles.copyright} aria-hidden="true">
           <span className={styles.cosmicGroup}>
-            <p className={styles.powered}>Made with ❤️ by Broadfaster</p>``
-            <a href="https://www.broadfaster.com">
+            <p className={styles.powered}>Made with ❤️ by Broadfaster</p>
+            <AppLink href="https://www.broadfaster.com">
               {/* <Image
                 className={styles.cosmic}
                 size={{ width: '110px', height: '90px' }}
@@ -93,7 +93,7 @@ const Footers = ({ navigation }) => {
                 alt="Broadfaster Logo"
                 objectFit="contain"
               /> */}
-            </a>
+            </AppLink>
           </span>
         </div>
       </div>

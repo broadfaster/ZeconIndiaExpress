@@ -16,14 +16,20 @@ import {
   getDataByCategory,
 } from '../../lib/cosmic'
 import getStripe from '../../lib/getStripe'
-
 import styles from '../../styles/pages/Item.module.sass'
+import Accordion from '../../components/Accordion'
 
 const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
   const { onAdd, cartItems, cosmicUser } = useStateContext()
 
   const [activeIndex, setActiveIndex] = useState(0)
+  const [activeFeature, setActiveFeature] = useState(0)
   const [visibleAuthModal, setVisibleAuthModal] = useState(false)
+
+  const handleToggle = index => {
+    // If the same section is clicked, close it. Otherwise, open the clicked one.
+    setActiveFeature(activeFeature === index ? null : index)
+  }
 
   const counts = itemInfo?.[0]?.metadata?.count
     ? Array(itemInfo[0]?.metadata?.count)
@@ -70,6 +76,23 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
     }
   }
 
+  const productDetails = [
+    { title: 'Brand', content: itemInfo[0]?.metadata?.brand },
+    { title: 'Model Name', content: itemInfo[0]?.metadata?.modelname },
+    { title: 'Motor Power', content: itemInfo[0]?.metadata?.motorpower },
+    { title: 'Battery Type', content: itemInfo[0]?.metadata?.batterytype },
+    {
+      title: 'Battery Capacity',
+      content: itemInfo[0]?.metadata?.batterycapacity,
+    },
+    { title: 'Charging Time', content: itemInfo[0]?.metadata?.chargingtime },
+    { title: 'Charging Point', content: itemInfo[0]?.metadata?.chargingpoint },
+    { title: 'Range', content: itemInfo[0]?.metadata?.range },
+    { title: 'Top Speed', content: itemInfo[0]?.metadata?.topspeed },
+    { title: 'Tyre Type', content: itemInfo[0]?.metadata?.tyretype },
+    { title: 'Display Type', content: itemInfo[0]?.metadata?.displaytype },
+  ]
+
   return (
     <Layout navigationPaths={navigationItems[0]?.metadata}>
       <div className={cn('section', styles.section)}>
@@ -83,13 +106,20 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
               </div>
               <div className={styles.image}>
                 <Image
-                  size={{ width: '100%', height: '100%' }}
+                  size={{ width: '100%', height: '100%', objectFit: 'contain' }}
                   srcSet={`${itemInfo[0]?.metadata?.image?.imgix_url}`}
                   src={itemInfo[0]?.metadata?.image?.imgix_url}
                   alt="Item"
                   objectFit="cover"
                 />
               </div>
+              <AppLink className={styles.link} href={'/contact'}>
+                <div className={styles.btns}>
+                  <button className={cn('button', styles.button)}>
+                    Booking Request
+                  </button>
+                </div>
+              </AppLink>
             </div>
           </div>
           <div className={styles.details}>
@@ -99,7 +129,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                 {`₹ ${itemInfo[0]?.metadata?.price}`}
               </div> */}
               <div className={cn('status-stroke-green', styles.price)}>
-                {itemInfo[0]?.metadata?.discountedPrice ? (
+                {itemInfo[0]?.metadata?.discountedprice ? (
                   // If there is a discounted price, show both prices
                   <>
                     {/* Original Price with strikethrough */}
@@ -114,7 +144,7 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                     </span>
                     {/* Discounted Price */}
                     <span style={{ color: 'green' }}>
-                      ₹ {itemInfo[0]?.metadata?.discountedPrice}
+                      ₹ {itemInfo[0]?.metadata?.discountedprice}
                     </span>
                   </>
                 ) : (
@@ -146,6 +176,19 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                 </button>
               ))}
             </div>
+            <div className="product-specifications">
+              {productDetails.map((spec, index) => {
+                return (
+                  <Accordion
+                    key={index}
+                    title={spec.title}
+                    content={spec.content}
+                    isOpen={activeFeature === index} // Open only the active accordion
+                    onToggle={() => handleToggle(index)} // Handle toggle
+                  />
+                )
+              })}
+            </div>
             <div className={styles.actions}>
               {/* <div className={styles.dropdown}>
                 <Dropdown
@@ -155,13 +198,6 @@ const Item = ({ itemInfo, categoriesGroup, navigationItems }) => {
                   options={counts}
                 />
               </div> */}
-              <AppLink className={styles.link} href={'/contact'}>
-                <div className={styles.btns}>
-                  <button className={cn('button', styles.button)}>
-                    Booking Request
-                  </button>
-                </div>
-              </AppLink>
             </div>
           </div>
         </div>

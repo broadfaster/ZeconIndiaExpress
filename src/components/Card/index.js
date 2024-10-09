@@ -13,7 +13,10 @@ const Card = ({ className, item }) => {
       <AppLink className={styles.link} href={`/item/${item?.slug}` || '/'}>
         <div className={styles.preview}>
           <Image
-            size={{ width: '100%', height: '360px' }}
+            size={{
+              width: '100%',
+              height: '40vh',
+            }}
             src={item?.metadata?.image?.imgix_url}
             alt="Card"
             objectFit="cover"
@@ -45,7 +48,7 @@ const Card = ({ className, item }) => {
             className={styles.bid}
             dangerouslySetInnerHTML={{ __html: item?.count }}
           />
-          <span className={styles.price}>{`₹ ${item?.metadata?.price}`}</span>
+          <span className={styles.price}>{`₹ ${item?.metadata?.discountedprice}`}</span>
         </div>
       </AppLink>
     </div>
