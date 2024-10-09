@@ -39,7 +39,7 @@ const Intro = ({ info }) => {
             <div className={styles.slide}>
               <div className={styles.row}>
                 <Image
-                  size={{ width: '70%', height: '80vh' }}
+                  size={{ width: '100%', height: '50vh' }}
                   className={styles.player}
                   srcSet={info?.metadata?.image?.imgix_url}
                   srcSetDark={info?.metadata?.image?.imgix_url}

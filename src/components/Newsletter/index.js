@@ -61,7 +61,7 @@ const OAuth = ({ className, handleClose, handleOAuth, disable }) => {
         setFillFiledMessage('Please fill all fields')
       }
     },
-    [fillFiledMessage, push, email]
+    [fillFiledMessage, email]
   )
 
   return (

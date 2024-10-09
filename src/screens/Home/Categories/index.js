@@ -62,10 +62,10 @@ const Categories = ({ info, type }) => {
                       >
                         <div className={styles.cart}>
                           <div className={styles.gallery}>
-                            {category[key]?.slice(0, 4)?.map((intro, index) => (
+                            {category[key]?.slice(0, 1)?.map((intro, index) => (
                               <div className={styles.preview} key={index}>
                                 <Image
-                                  size={{ width: '100%', height: '128px' }}
+                                  size={{ width: '100%', height: '310px' }}
                                   src={intro?.metadata?.image?.imgix_url}
                                   alt="Collection"
                                   objectFit="cover"

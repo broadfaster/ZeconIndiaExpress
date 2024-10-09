@@ -59,13 +59,31 @@
         margin: 0 0 32px
 
 .image
-    position: relative
-    border-radius: 16px
-    overflow: hidden
-    background: $neutrals8
-    width: 100%
-    height: 560px
+  position: relative
+  border-radius: 16px
+  overflow: hidden
+  background: $neutrals8
+  width: 100%
+  height: 510px
+  display: flex
+  justify-content: center // Ensures that image is centered in case of flexbox issues
+  align-items: center // Centers the image vertically
 
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain // Ensures the entire image fits within the container without cropping
+    display: block
+    margin: 0 // Removes any default margin on the image
+    padding: 0 // Removes any default padding on the image
+
+  +t // Tablet-specific
+    height: 360px
+
+  +m // Mobile-specific
+    height: 260px
+
+    
 .details
     display: flex
     flex-direction: column
@@ -148,6 +166,9 @@
     +button-2
     color: $neutrals4
     transition: all .2s
+    display: flex
+    align-items: center
+    justify-content: center
     &:hover
         color: $neutrals3
         +dark

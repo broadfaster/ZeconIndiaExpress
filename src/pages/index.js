@@ -1,6 +1,7 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import { useStateContext } from '../utils/context/StateContext'
 import Layout from '../components/Layout'
+import Modal from '../components/Modal'
 import {
   Intro,
   Selection,
@@ -12,6 +13,7 @@ import {
 } from '../screens/Home'
 import chooseBySlug from '../utils/chooseBySlug'
 import { getDataByCategory, getAllDataByType } from '../lib/cosmic'
+import Offer from '../components/Offer'
 
 const Home = ({
   reviews,
@@ -20,6 +22,7 @@ const Home = ({
   categoryTypes,
   navigationItems,
 }) => {
+  const [visibleAuthModal, setVisibleAuthModal] = useState(false)
   const { categories, onCategoriesChange, setNavigation } = useStateContext()
 
   const handleContextAdd = useCallback(
@@ -31,8 +34,9 @@ const Home = ({
   )
 
   useEffect(() => {
-    let isMounted = true
+    setVisibleAuthModal(true)
 
+    let isMounted = true
     if (!categories['groups']?.length && isMounted) {
       handleContextAdd(
         categoriesGroup?.groups,
@@ -67,6 +71,12 @@ const Home = ({
         info={categoriesGroup['groups']}
         type={categoriesGroup['type']}
       />
+      <Modal
+        visible={visibleAuthModal}
+        onClose={() => setVisibleAuthModal(false)}
+      >
+        <Offer handleClose={() => setVisibleAuthModal(false)} />
+      </Modal>
     </Layout>
   )
 }

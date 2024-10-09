@@ -18,16 +18,6 @@ const settings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   adaptiveHeight: true,
-  nextArrow: (
-    <SlickArrow>
-      <Icon name="arrow-next" size="14" />
-    </SlickArrow>
-  ),
-  prevArrow: (
-    <SlickArrow>
-      <Icon name="arrow-prev" size="14" />
-    </SlickArrow>
-  ),
   responsive: [
     {
       breakpoint: 1340,

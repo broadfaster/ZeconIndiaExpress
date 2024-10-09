@@ -26,7 +26,7 @@ const Selection = ({ info, type }) => {
           <div className={styles.row}>
             <div className={styles.col}>
               {info?.length &&
-                Object.values(info[0])[0]?.map(
+                Object.values(info[2])[0]?.map(
                   (x, index) =>
                     index === 0 && (
                       <AppLink
@@ -35,7 +35,7 @@ const Selection = ({ info, type }) => {
                         key={index}
                       >
                         <Image
-                          size={{ width: '100%', height: '75vh' }}
+                          size={{ width: '100%', height: '55vh' }}
                           srcSet={`${x.metadata?.image?.imgix_url} 2x`}
                           src={`${x.metadata?.image?.imgix_url}`}
                           alt="Selection"
