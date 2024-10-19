@@ -38,7 +38,9 @@ const Contact = ({ navigationItems, categoriesType }) => {
   const [visiblePreview, setVisiblePreview] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    window.fbq('track', 'ContactPageVisit')
+  }, [])
 
   const handleOAuth = useCallback(
     async user => {
@@ -82,6 +84,12 @@ const Contact = ({ navigationItems, categoriesType }) => {
   const submitForm = useCallback(
     async e => {
       e.preventDefault()
+
+      console.log(phone)
+      window.fbq('track', 'PhoneNumberSubmission', {
+        content_name: 'Contact Form',
+        phone_number: phone, // Pass the phone number as a parameter
+      })
 
       if (name && phone && email && message) {
         fillFiledMessage && setFillFiledMessage(false)
