@@ -37,8 +37,25 @@ const Contact = ({ navigationItems, categoriesType }) => {
   const [visibleAuthModal, setVisibleAuthModal] = useState(false)
   const [visiblePreview, setVisiblePreview] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [locationData, setLocationData] = useState(null)
 
   useEffect(() => {
+    // Fetch geolocation data
+    const fetchGeolocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const { latitude, longitude } = position.coords
+            setLocationData({ latitude, longitude })
+          },
+          error => {
+            console.error('Geolocation error:', error)
+          }
+        )
+      }
+    }
+
+    fetchGeolocation()
     window.fbq('track', 'ContactPageVisit')
   }, [])
 
@@ -85,50 +102,77 @@ const Contact = ({ navigationItems, categoriesType }) => {
     async e => {
       e.preventDefault()
 
-      console.log(phone)
-      window.fbq('track', 'PhoneNumberSubmission', {
-        content_name: 'Contact Form',
-        phone_number: phone, // Pass the phone number as a parameter
-      })
-
       if (name && phone && email && message) {
-        fillFiledMessage && setFillFiledMessage(false)
+        setFillFiledMessage(false)
         setLoading(true)
-        const response = await fetch('/api/form', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            phone,
-            email,
-            message,
-          }),
-        })
 
-        const createdContactDetail = await response.json()
+        // Prepare data for the lead
+        const leadData = {
+          name,
+          phone,
+          email,
+          message,
+          latitude: locationData?.latitude || null, // Include geolocation
+          longitude: locationData?.longitude || null,
+        }
 
-        console.log(createFormFields)
+        try {
+          // Send the lead data to your /api/form
+          const response = await fetch('/api/form', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(leadData), // Send all the lead data
+          })
 
-        if (createdContactDetail['object']) {
-          toast.success(
-            `Thank You, We will reach you soon ${createdContactDetail['object']['title']} item`,
-            {
-              position: 'bottom-right',
+          const createdContactDetail = await response.json()
+          console.log(createdContactDetail)
+          if (response.ok) {
+            // If the first API call was successful, call the sendLeads API
+            const sendLeadsResponse = await fetch('/api/sendLeads', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(leadData), // Send lead data to sendLeads
+            })
+
+            if (sendLeadsResponse.ok) {
+              toast.success(
+                `Thank you, we will reach you soon at ${createdContactDetail['object']['title']}!`,
+                {
+                  position: 'bottom-right',
+                }
+              )
+              setFields(createFormFields) // Reset form fields
+              setVisiblePreview(false) // Hide preview after successful submission
+            } else {
+              toast.error('Failed to send lead data. Please try again.', {
+                position: 'bottom-right',
+              })
             }
-          )
+          } else {
+            toast.error(`Error: ${createdContactDetail.error}`, {
+              position: 'bottom-right',
+            })
+          }
+        } catch (error) {
+          console.error('Submission error:', error)
+          toast.error('Submission failed. Please try again later.', {
+            position: 'bottom-right',
+          })
+        } finally {
           setLoading(false)
-          setFields(createFormFields)
         }
       } else {
-        setFillFiledMessage(true)
+        setFillFiledMessage(true) // Show error if fields are not filled
       }
     },
-    [fillFiledMessage, push, name, phone, email, message]
+    [name, phone, email, message, locationData] // Add locationData as a dependency
   )
-
   return (
     <Layout navigationPaths={navigationItems[0]?.metadata || navigation}>
       <PageMeta
@@ -210,12 +254,12 @@ const Contact = ({ navigationItems, categoriesType }) => {
               </div>
             </form>
           </div>
-          <Preview
+          {/* <Preview
             className={cn(styles.preview, { [styles.active]: visiblePreview })}
             info={{ name, phone, email, message }}
             image={uploadMedia?.['imgix_url']}
             onClose={() => setVisiblePreview(false)}
-          />
+          /> */}
         </div>
       </div>
       <Modal

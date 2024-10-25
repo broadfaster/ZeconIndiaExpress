@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Toaster } from 'react-hot-toast'
 import { StateContext } from '../utils/context/StateContext'
@@ -7,22 +7,48 @@ import '../styles/app.sass'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
+  const [locationData, setLocationData] = useState(null)
+
   useEffect(() => {
-    const handleRouteChange = () => {
-      if (window.fbq) {
-        window.fbq('track', 'PageView')
+    // Fetch geolocation data
+    const fetchGeolocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const { latitude, longitude } = position.coords
+            setLocationData({ latitude, longitude })
+          },
+          error => {
+            console.error('Geolocation error:', error)
+          }
+        )
       }
     }
 
-    // Track the first page load
-    handleRouteChange()
+    fetchGeolocation()
 
-    // Track subsequent route changes
+    const handleRouteChange = url => {
+      if (window.fbq) {
+        // Send page view with geolocation data if available
+        window.fbq('track', 'PageView', {
+          pagePath: url,
+          pageTitle: document.title,
+          referrer: document.referrer || null,
+          latitude: locationData?.latitude || null,
+          longitude: locationData?.longitude || null,
+        })
+      }
+    }
+
+    // Track first page load with metadata
+    handleRouteChange(router.asPath)
+
+    // Track subsequent route changes with metadata
     router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [router.events])
+  }, [router, locationData])
 
   return (
     <StateContext>
