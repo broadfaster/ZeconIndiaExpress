@@ -34,7 +34,8 @@ const Home = ({
   )
 
   useEffect(() => {
-    setVisibleAuthModal(true)
+    // SALE IS LIVE MODAL SWITCH
+    setVisibleAuthModal(false)
 
     let isMounted = true
     if (!categories['groups']?.length && isMounted) {
